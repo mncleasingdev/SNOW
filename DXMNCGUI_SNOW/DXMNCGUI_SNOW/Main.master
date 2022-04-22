@@ -1,0 +1,139 @@
+<%@ Master Language="C#" MasterPageFile="~/Root.master" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="DXMNCGUI_SNOW.MainMaster" %>
+
+<%-- DXCOMMENT: Page Main.master is a master page that contains central area layout --%>
+<asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">  
+        <dx:ASPxPanel ID="LeftPane" runat="server" FixedPosition="WindowLeft" ClientInstanceName="leftPane" CssClass="leftPane" Collapsible="true">
+            <SettingsAdaptivity CollapseAtWindowInnerWidth="1023" />
+            <Styles>
+                <Panel CssClass="panel"></Panel>
+            </Styles>
+            <PanelCollection>
+                <dx:PanelContent runat="server">
+                        <div class="leftPanel">
+                            <%-- DXCOMMENT: Configure the left panel's ASPxNavBar --%>
+                            <dx:ASPxNavBar ID="ASPxNavBar1" runat="server" AutoCollapse="True" EnableAnimation="True" Width="100%" Theme="Office2010Black">
+                                <Border BorderWidth="0px" />
+                                <Paddings Padding="0px" />
+                                <Groups>
+                                    <dx:NavBarGroup Name="nbgTicketMenu" Text="Ticket Menu" HeaderImage-Url="Content/Image/ParentMenuIcon-16x16.png">
+                                        <Items>
+                                            <dx:NavBarItem Name="MenuIncident" Text="Incident" Image-Url="Content/Image/EnvelopIco-16x16.png" NavigateUrl="Transaction/TicketTrans/FormTicketMaint.aspx"></dx:NavBarItem>
+                                            <dx:NavBarItem Name="MenuRequest" Text="Request" Image-Url="Content/Image/EnvelopIco-16x16.png" NavigateUrl="Transaction/TicketTrans/Request/FormRequestTicketMaint.aspx"></dx:NavBarItem>
+                                            <dx:NavBarItem Name="MenuCDR" Text="Change Data Request" Image-Url="Content/Image/EnvelopIco-16x16.png" NavigateUrl="~/Transaction/TicketTrans/ChangeDataRequest/FormTicketChangeDataRequestMaint.aspx"></dx:NavBarItem>
+                                        </Items>
+                                    </dx:NavBarGroup>
+                                    <dx:NavBarGroup Name="nbgReporting" Text="Reporting" HeaderImage-Url="Content/Image/ParentMenuIcon-16x16.png">
+                                        <Items>               
+                                            <dx:NavBarItem Name="nbMyChart" Text="Ticket Summary" Image-Url="Content/Image/ChartIcon-16x16.png" NavigateUrl="Transaction/Chart/iTicketReporting.aspx"></dx:NavBarItem>
+                                            <dx:NavBarItem Name="nbReportCDR" Text="CDR Detail listing" Image-Url="Content/Image/ChartIcon-16x16.png" NavigateUrl="Transaction/Reporting/CDRDetailListing.aspx"></dx:NavBarItem>
+                                        </Items>
+                                    </dx:NavBarGroup>
+                                    <dx:NavBarGroup Name="nbgGeneralMaintenance" Text="General Maintenance" HeaderImage-Url="Content/Image/ParentMenuIcon-16x16.png">
+                                        <Items>               
+                                            <dx:NavBarItem Name="AccessRightMaintenance" Text="Access Right Maintenance" Image-Url="Content/Image/AccessIcon-16x16.png"></dx:NavBarItem>
+                                            <dx:NavBarItem Name="CategoryMaintenance" Text="Category Maintenance" Image-Url="Content/Image/FolderIcon-16x16.png" NavigateUrl="GeneralMaint/CategoryMaintEntry.aspx"></dx:NavBarItem>
+                                            <dx:NavBarItem Name="ChangePassword" Text="Changes Password" Image-Url="Content/Image/PasswordIcon-16x16.png"></dx:NavBarItem>
+                                            <dx:NavBarItem Name="UserMaintenance" Text="Users Maintenance" Image-Url="Content/Image/UserMtcIcon-16x16.png"></dx:NavBarItem>
+                                        </Items>
+                                    </dx:NavBarGroup>
+                                </Groups>
+                            </dx:ASPxNavBar>
+                        </div>
+                </dx:PanelContent>
+            </PanelCollection>
+        </dx:ASPxPanel>
+        <div class="contentPane">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+            <asp:ContentPlaceHolder ID="SecondaryContent" runat="server" />
+        </div>
+        <script type="text/javascript">
+        //function cplMain_Init(s, e)
+        //{
+        //    //scheduleGridUpdate(s);
+        //}
+        //function cplMain_EndCallback(s)
+        //{
+        //    switch (cplMain.cpCallbackParam)
+        //    {
+        //        case "CHECKING_NEW_DATA":
+        //            if (cplMain.cplIsNewRow == true)
+        //            {
+        //                //gvNotif.PerformCallback();
+        //                //apcNotification.Show();
+        //            }
+        //            break;
+        //    }
+        //    cplMain.cpCallbackParam = "";
+        //    //scheduleGridUpdate(s);
+        //}
+        //var timeout;
+        //function scheduleGridUpdate(popup)
+        //{
+        //    window.clearTimeout(timeout);
+        //    timeout = window.setTimeout(
+        //        function ()
+        //        {
+        //            cplMain.PerformCallback('CHECKING_NEW_DATA');
+        //        },
+        //        2000
+        //    );
+        //}
+        //function cplMain_BeginCallback(s, e)
+        //{
+        //    window.clearTimeout(timeout);
+        //}
+        </script>
+        <dx:ASPxPopupControl 
+            ID="apcNotification"
+            ClientInstanceName="apcNotification" 
+            runat="server" 
+            Modal="false"
+            ShowCloseButton="true"
+            PopupAnimationType="Fade"
+            PopupHorizontalAlign="WindowCenter"              
+            PopupVerticalAlign="WindowCenter" 
+            HeaderText="" 
+            HeaderImage-Url="~/Content/Image/SnowLogo.png" 
+            HeaderImage-Height="20" 
+            HeaderImage-Width="80" HeaderStyle-BackColor="#393939"
+            AllowDragging="false"             
+            EnableCallbackAnimation="true" 
+            CloseAction="CloseButton" 
+            Theme="MetropolisBlue" 
+            EnableViewState="False" 
+            Width="400px" 
+            Height="50px" 
+            FooterStyle-Wrap="False" 
+            ShowFooter="false" 
+            FooterText="" 
+            AllowResize="false" 
+            PopupHorizontalOffset="500" 
+            PopupVerticalOffset="300" 
+            SettingsAdaptivity-Mode="OnWindowInnerWidth" Border-BorderWidth="2">
+            <ContentCollection>
+                <dx:PopupControlContentControl ID="PopupControlContentControl1" runat="server">
+                    <dx:ASPxFormLayout ID="ASPxFormLayout" runat="server" Width="100%">
+                        <Items>
+                            <dx:LayoutItem ShowCaption="False">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer>
+                                        <dx:ASPxLabel runat="server" ID="lblNotif" Text="New ticket are created... please open to see detail below :" Font-Names="Calibri"></dx:ASPxLabel>
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+                            <dx:LayoutItem ShowCaption="False" HorizontalAlign="Right">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer>
+                                        <dx:ASPxButton runat="server" ID="btnShow" ClientInstanceName="btnShow" Text="Show" Width="100" Theme="MetropolisBlue"></dx:ASPxButton>
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+                        </Items>
+                    </dx:ASPxFormLayout>
+                </dx:PopupControlContentControl>
+            </ContentCollection>
+        </dx:ASPxPopupControl>
+        <%--<dx:ASPxCallback ID="cplMain" runat="server" ClientInstanceName="cplMain" OnCallback="cplMain_Callback">
+            <ClientSideEvents BeginCallback="cplMain_BeginCallback" EndCallback="cplMain_EndCallback" Init="cplMain_Init"/>
+        </dx:ASPxCallback>--%>
+</asp:Content>

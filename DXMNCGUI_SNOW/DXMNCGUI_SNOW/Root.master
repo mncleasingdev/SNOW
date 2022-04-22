@@ -1,0 +1,135 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Root.master.cs" Inherits="DXMNCGUI_SNOW.RootMaster" %>
+
+<%-- DXCOMMENT: Page Root.master is a master page that contains the root layout (it includes Header, Cental Area, and Footer) --%>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <%--<head runat="server">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="Content/Site.css" />
+    <style type="text/css">
+        .auto-style1 {
+            font-size: medium;
+        }
+    </style>
+</head>--%>
+    <head runat="server">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0" />
+    <title>SNOW helpdesk Management</title>
+    <link rel="icon" type="image/png" href="Content/Image/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="Content/Site.css"  />
+     <style type="text/css">
+        .footerPane {}
+        .auto-style1 
+        {
+            width: 1028px;
+        }
+    </style>
+</head>
+    <body runat="server" id="Body">
+    <form id="form1" runat="server">
+        <dx:ASPxPanel ID="HeaderPane" runat="server" FixedPosition="WindowTop" ClientInstanceName="headerPane" CssClass="headerPane" Collapsible="true">
+            <SettingsAdaptivity CollapseAtWindowInnerWidth="500" />
+            <Styles>
+                <Panel CssClass="panel"></Panel>
+                <ExpandedPanel CssClass="expandedPanel">
+                </ExpandedPanel>
+                <ExpandBar CssClass="bar"></ExpandBar>
+            </Styles>
+            <PanelCollection>
+                <dx:PanelContent runat="server" SupportsDisabledAttribute="True">
+                        <div class="headerTop">
+                            <br />
+                            <div>
+                                <dx:ASPxImage ID="HeaderImage" runat="server" ImageUrl="~/Content/Image/SnowLogoGifNew.gif" ImageAlign="Left" Width="10%"></dx:ASPxImage>
+                            </div>
+                            <div class="templateTitle">
+                                <%--<a id="TitleLink" href="~/" runat="server" class="auto-style1">Service Now</a>--%>
+                                <dx:ASPxLabel ID="lblServiceNow" runat="server" Font-Size="Medium" Text="Service NOW">
+                                    
+                                </dx:ASPxLabel>
+                            </div>
+                            <div class="loginControl"> 
+                                <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+                                    <AnonymousTemplate>
+                                        <dx:ASPxLabel ID="lblUserName" runat="server"  Font-Bold="false" Font-Names="Calibri" Font-Size="Small">                                             
+                                        </dx:ASPxLabel>
+                                        |
+                                        <dx:ASPxHyperLink runat="server" ClientInstanceName="inkLogOut" Text="Log Out" Font-Names="Calibri" ForeColor="WhiteSmoke" Cursor="pointer">
+                                            <ClientSideEvents Click="function(s, e) {clb.PerformCallback('LogOut');}"/>
+                                        </dx:ASPxHyperLink>
+                                        <dx:ASPxCallback ID="ASPxCallback" runat="server" ClientInstanceName="clb" oncallback="ASPxCallback_Callback">
+                                        </dx:ASPxCallback>
+                                    </AnonymousTemplate>
+                                    <LoggedInTemplate>
+                                        Welcome <span class="bold">
+                                        <a runat="server" href="~/Account/Manage.aspx" title="Manage your account"> 
+                                            <asp:LoginName ID="HeadLoginName" runat="server" />
+                                        </a> 
+                                        </span>! [
+                                        <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out"
+                                            LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_LoggingOut" />
+                                        ]
+                                    </LoggedInTemplate>
+                                </asp:LoginView>
+                            </div>
+                        </div>
+                        <div class="headerMenu">
+                            <%-- DXCOMMENT: Configure the header menu --%>
+                            <dx:ASPxMenu ID="HeaderMenu" runat="server" CssClass="headerMenu" ClientInstanceName="headerMenu" ItemAutoWidth="False" Width="100%">
+                                <Items>
+                                    <dx:MenuItem Text="Home" Image-Url="Content/Image/HomeIcon-16x16.png" NavigateUrl="Default.aspx"></dx:MenuItem>
+                                    <dx:MenuItem Text="My Working List" Image-Url="Content/Image/WorkListIcon-16x16.png" NavigateUrl="~/Transaction/WorkingList/FormWorkingListMaint.aspx"></dx:MenuItem>
+                                    <%--<dx:MenuItem Text="My Test Page" NavigateUrl="ResponsiveLayoutPage.aspx"></dx:MenuItem>--%>
+                                </Items>
+                            </dx:ASPxMenu>
+                        </div>
+                </dx:PanelContent>
+            </PanelCollection>
+            <ExpandBarTemplate>
+                <div class="templateTitle">
+                    <a id="TitleLink" href="~/" runat="server">Snow Helpdesk Management</a>
+                </div>
+            </ExpandBarTemplate>
+        </dx:ASPxPanel>
+        <script type="text/javascript">
+            function updateHeaderMenuOrientation()
+            {
+                if(!window.headerMenu) return;
+                var orientation = headerPane.IsExpandable() ? 'Vertical' : 'Horizontal';
+                if(orientation !== headerMenu.GetOrientation()) 
+                    headerMenu.SetOrientation(orientation);
+            }
+        </script>
+        <dx:ASPxGlobalEvents runat="server">
+            <ClientSideEvents ControlsInitialized="updateHeaderMenuOrientation" BrowserWindowResized="updateHeaderMenuOrientation" />
+        </dx:ASPxGlobalEvents>
+        <dx:ASPxPanel ID="MainPane" runat="server" CssClass="mainContentPane">
+            <PanelCollection>
+                <dx:PanelContent runat="server" SupportsDisabledAttribute="True">
+                    <asp:ContentPlaceHolder ID="Content" runat="server" />
+                </dx:PanelContent>
+            </PanelCollection>
+        </dx:ASPxPanel>
+        <dx:ASPxPanel ID="FooterPane" runat="server" FixedPosition="WindowBottom" ClientInstanceName="footerPane" CssClass="footerPane" Width="100%">
+            <SettingsAdaptivity HideAtWindowInnerWidth="500" />
+            <Styles>
+                <Panel CssClass="panel"></Panel>
+            </Styles>
+            <PanelCollection>
+                <dx:PanelContent runat="server" SupportsDisabledAttribute="True">
+                        <div class="footerMenu">
+                           
+                        </div>
+                        <div class="copyright">
+                            <dx:ASPxLabel ID="ASPxLabel2" runat="server" Width="100%">
+                            </dx:ASPxLabel>
+                        </div>
+                </dx:PanelContent>
+            </PanelCollection>
+        </dx:ASPxPanel>
+    </form>
+</body>
+</html>
